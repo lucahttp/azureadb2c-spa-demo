@@ -11,11 +11,33 @@ import { LogLevel } from "@azure/msal-browser";
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md 
  */
 
+
+export const b2cPolicies = {
+    names: {
+        signUpSignIn: "B2C_1_susi",
+        editProfile: "B2C_1_edit_profile"
+    },
+    authorities: {
+        signUpSignIn: {
+            authority: "https://mischangas.b2clogin.com/mischangas.onmicrosoft.com/B2C_1_susi",
+        },
+        editProfile: {
+            authority: "https://mischangas.b2clogin.com/mischangas.onmicrosoft.com/B2C_1_edit_profile"
+        }
+    },
+    authorityDomain: "mischangas.b2clogin.com"
+};
+
+
+
 export const msalConfig = {
     auth: {
-        clientId: "Enter_the_Application_Id_Here",
-        authority: "https://login.microsoftonline.com/Enter_the_Tenant_Info_Here",
-        redirectUri: "http://localhost:3000",
+        clientId: "cb47ba50-a1c5-4509-adb7-ba82db356a17",
+        authority: b2cPolicies.authorities.signUpSignIn.authority,
+        knownAuthorities: [b2cPolicies.authorityDomain],
+        redirectUri: '/'
+        //authority: "https://login.microsoftonline.com/mischangas.onmicrosoft.com",
+        //redirectUri: "https://9000-idx-azureadb2c-spa-demo-1720637726231.cluster-4ezwrnmkojawstf2k7vqy36oe6.cloudworkstations.dev",
     },
     cache: {
         cacheLocation: "sessionStorage", // This configures where your cache will be stored
